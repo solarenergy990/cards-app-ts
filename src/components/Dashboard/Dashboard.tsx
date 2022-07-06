@@ -143,13 +143,13 @@ const Dashboard = () => {
       />
       <InterviewList
         applicants={visibleApplicants}
-        onApplicantDelete={deleteApplicant}
+        // onApplicantDelete={deleteApplicant}
         onApproveApplicant={approveApplicant}
       />
 
       <ApprovedList
         applicants={visibleApplicants}
-        onApplicantDelete={deleteApplicant}
+        // onApplicantDelete={deleteApplicant}
       />
     </>
   );

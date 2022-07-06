@@ -6,10 +6,12 @@ import IApplicant from '../../../interfaces/IApplicant.inteface'
 
 type Props = {
   applicants: IApplicant[];
-  onApplicantDelete: (applicantId: string) => void;
+  // onApplicantDelete: (applicantId: string) => void;
 }
 
-const ApprovedList = ({ applicants, onApplicantDelete }: Props) => {
+const ApprovedList = ({ applicants, 
+  // onApplicantDelete
+ }: Props) => {
   return (
     <>
       <div className={s.list}>
@@ -28,7 +30,7 @@ const ApprovedList = ({ applicants, onApplicantDelete }: Props) => {
                     // applicantName={name}
                     // applicantNumber={number}
                     // applicantDesiredPosition={desiredPosition}
-                    onClickRemove={onApplicantDelete}
+                    // onClickRemove={onApplicantDelete}
                     // applicantStatus={status}
                   />
                 )}

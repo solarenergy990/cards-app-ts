@@ -6,13 +6,13 @@ import IApplicant from '../../../interfaces/IApplicant.inteface'
 
 interface Props {
   applicants: IApplicant[];
-  onApplicantDelete: (applicantId: string) => void;
+  // onApplicantDelete: (applicantId: string) => void;
   onApproveApplicant: (applicantId: string) => void;
 }
 
 const InterviewList = ({
   applicants,
-  onApplicantDelete,
+  // onApplicantDelete,
   onApproveApplicant,
 }: Props) => {
   return (
@@ -35,7 +35,7 @@ const InterviewList = ({
                     // onClickRemove={() => onApplicantDelete(id)}
                     // onClickToApprove={() => onApproveApplicant(id)}
                     applicantsData={applicant}
-                    onClickRemove={onApplicantDelete}
+                    // onClickRemove={onApplicantDelete}
                     onClickToApprove={onApproveApplicant}
                     // applicantStatus={status}
                   />

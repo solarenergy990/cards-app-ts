@@ -17,11 +17,14 @@ const ContactForm = ({ setActive }: Props) => {
   const [desiredPosition, setDesiredPosition] = useState('');
   const [status, setStatus] = useState('');
 
+  // brings dispatcher here
   const dispatch = useAppDispatch();
+  // brings global state here
   const applicants = useAppSelector(({ applicants }) => {
     return applicants;
   });
 
+  // catches form changes
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = evt.target;
 
@@ -37,6 +40,7 @@ const ContactForm = ({ setActive }: Props) => {
     setStatus('application');
   };
 
+  //creates new applicant object and sends it to reducer through dispatcher
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 

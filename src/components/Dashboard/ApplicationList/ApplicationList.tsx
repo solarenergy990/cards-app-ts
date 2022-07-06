@@ -1,4 +1,5 @@
 import ApplicantCard from '../../ApplicantCard/ApplicantCard';
+import ListContainer from '../ListContainer/ListContainer';
 import s from './ApplicationList.module.scss';
 import { Button } from 'react-bootstrap';
 
@@ -11,35 +12,31 @@ interface Props {
 
 const ApplicationList = ({ applicants, setActive }: Props) => {
   return (
-    <>
-      <div className={s.list}>
-        <h2 className={s.title}>Applications</h2>
+    <ListContainer title={'Applications'}>
+      <ul>
+        {applicants.map(applicant => {
+          const { id, status } = applicant;
 
-        <ul>
-          {applicants.map(applicant => {
-            const { id, status } = applicant;
+          return (
+            <div className={s.card} key={id}>
+              {status === 'application' && (
+                <ApplicantCard applicantsData={applicant} />
+              )}
+            </div>
+          );
+        })}
+      </ul>
 
-            return (
-              <div className={s.card} key={id}>
-                {status === 'application' && (
-                  <ApplicantCard applicantsData={applicant} />
-                )}
-              </div>
-            );
-          })}
-        </ul>
-
-        <div className={s.button}>
-          <Button
-            type="button"
-            variant="btn btn-success"
-            onClick={() => setActive(true)}
-          >
-            +
-          </Button>
-        </div>
+      <div className={s.button}>
+        <Button
+          type="button"
+          variant="btn btn-success"
+          onClick={() => setActive(true)}
+        >
+          +
+        </Button>
       </div>
-    </>
+    </ListContainer>
   );
 };
 

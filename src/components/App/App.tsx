@@ -1,11 +1,15 @@
 import Container from '../Container/Container';
 import Dashboard from '../Dashboard/Dashboard';
+import Header from '../Header/Header';
 
 const App = () => {
   return (
-    <Container>
-      <Dashboard />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        <Dashboard />
+      </Container>
+    </>
   );
 };
 

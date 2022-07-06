@@ -1,5 +1,6 @@
 import React from 'react';
 import ApplicantCard from '../../ApplicantCard/ApplicantCard';
+import ListContainer from '../ListContainer/ListContainer';
 import s from './ApprovedList.module.scss';
 
 import IApplicant from '../../../interfaces/IApplicant.inteface';
@@ -10,25 +11,22 @@ type Props = {
 
 const ApprovedList = ({ applicants }: Props) => {
   return (
-    <>
-      <div className={s.list}>
-        <h2 className={s.title}>Approved</h2>
+    <ListContainer title={'Approved'}>
+      <ul>
+        {applicants.map(applicant => {
+          const { id, status } = applicant;
 
-        <ul>
-          {applicants.map(applicant => {
-            const { id, status } = applicant;
-
-            return (
-              <div className={s.card} key={id}>
-                {status === 'approved' && (
-                  <ApplicantCard applicantsData={applicant} />
-                )}
-              </div>
-            );
-          })}
-        </ul>
-      </div>
-    </>
+          return (
+            <div className={s.card} key={id}>
+              
+              {status === 'approved' && (
+                <ApplicantCard applicantsData={applicant} />
+              )}
+            </div>
+          );
+        })}
+      </ul>
+    </ListContainer>
   );
 };
 

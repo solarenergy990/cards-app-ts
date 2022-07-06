@@ -21,7 +21,6 @@ const Dashboard = () => {
       </Modal>
       <ApplicationList applicants={applicants} setActive={setModalActive} />
       <InterviewList applicants={applicants} />
-
       <ApprovedList applicants={applicants} />
     </>
   );

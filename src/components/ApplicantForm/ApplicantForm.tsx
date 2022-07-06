@@ -3,35 +3,24 @@ import { Button } from 'react-bootstrap';
 import shortid from 'shortid';
 
 import s from './Applicant.module.scss';
-import actions from '../../redux/app/actions'
-
-// import StatusContext from '../../context/context';
-// import IApplicant from '../../interfaces/IApplicant.inteface'
+import actions from '../../redux/app/actions';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 
 type Props = {
-  // onSubmit: (applicant: IApplicant) => void;
   setActive: (applicantStatus: boolean) => void;
-}
+};
 
-const ContactForm = ({
-  // onSubmit,
-  setActive,
-  
-}: Props) => {
+const ContactForm = ({ setActive }: Props) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [desiredPosition, setDesiredPosition] = useState('');
-  // const { status, setStatus } = useContext(StatusContext);
-  const   [status, setStatus] = useState('');
+  const [status, setStatus] = useState('');
 
   const dispatch = useAppDispatch();
-  const applicants = useAppSelector(({applicants}) => {
-    
+  const applicants = useAppSelector(({ applicants }) => {
     return applicants;
   });
- 
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = evt.target;
@@ -51,7 +40,7 @@ const ContactForm = ({
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-      const newApplicant = {
+    const newApplicant = {
       id: shortid.generate(),
       name,
       number,
@@ -59,17 +48,15 @@ const ContactForm = ({
       status,
     };
 
-      const checkedApplicantsNames = applicants.map(applicant => {
+    const checkedApplicantsNames = applicants.map(applicant => {
       return applicant.name.toLowerCase();
     });
 
-      if (!checkedApplicantsNames.includes(name.toLowerCase())) {
-      dispatch(actions.addApplicant(newApplicant))
+    if (!checkedApplicantsNames.includes(name.toLowerCase())) {
+      dispatch(actions.addApplicant(newApplicant));
     } else {
       alert(`${name} is already in list`);
     }
-
-    // onSubmit({ name, number, desiredPosition, status });
 
     reset();
   };

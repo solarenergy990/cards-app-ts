@@ -8,27 +8,21 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 
 type Props = {
   applicantsData: IApplicant;
-  // onClickRemove: (applicantId: string) => void;
-  // onClickToInterview?: (applicantId: string) => void;
-  // onClickToApprove?: (applicantId: string) => void;
 };
 
-const ApplicantCard = ({
-  applicantsData,
-}: // onClickRemove,
-// onClickToInterview,
-// onClickToApprove,
-Props) => {
+const ApplicantCard = ({ applicantsData }: Props) => {
   const { id, name, number, desiredPosition, status } = applicantsData;
 
+  // brings global state here
   const applicants = useAppSelector(({ applicants }) => {
     return applicants;
   });
+  // brings dispatcher here
   const dispatch = useAppDispatch();
 
+  // Changes status for an applicant so that he moves to the interview column
   const handleMoveApplicantToIterview = () => {
     if (status === 'application') {
-      // onClickToInterview(id);
       const applicantForInterview = applicants.find(
         applicant => id === applicant.id,
       );
@@ -44,19 +38,15 @@ Props) => {
           status: 'interview',
         };
 
-        // erasing an applicant from previous status line
+        // erasing an applicant from previous status column
         dispatch(actions.deleteApplicant(id));
-        // setting new array of applicants with changed applicant
+        // setting new array of applicants with changed applicant data
         dispatch(actions.setApplicantToInterview(applicant));
       }
     }
   };
 
   const handleMoveApplicantToApproved = () => {
-    // if (onClickToApprove && id) {
-    //   onClickToApprove(id);
-    // }
-
     if (status === 'interview') {
       const applicantForApproval = applicants.find(
         applicant => id === applicant.id,
@@ -83,7 +73,6 @@ Props) => {
 
   const handleDeleteApplicant = () => {
     if (id) {
-      // onClickRemove(id);
       dispatch(actions.deleteApplicant(id));
     }
   };

@@ -4,7 +4,6 @@ import appActions from './actions';
 import initialApplicants from '../../components/Dashboard/applicants.json';
 import IApplicant from '../../interfaces/IApplicant.inteface';
 
-
 const {
   addApplicant,
   setApplicantToInterview,
@@ -39,10 +38,15 @@ export default createReducer(initialState, builder => {
         ...state,
         applicants: [...state.applicants, action.payload],
       };
-    }).addCase(deleteApplicant, (state, action) => {
+    })
+    .addCase(deleteApplicant, (state, action) => {
       return {
         ...state,
-        applicants: [...state.applicants.filter(applicant => applicant.id !== action.payload)],
+        applicants: [
+          ...state.applicants.filter(
+            applicant => applicant.id !== action.payload,
+          ),
+        ],
       };
     });
 });

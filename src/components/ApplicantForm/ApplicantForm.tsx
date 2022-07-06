@@ -1,18 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
+import shortid from 'shortid';
 
 import s from './Applicant.module.scss';
+import actions from '../../redux/app/actions'
 
 // import StatusContext from '../../context/context';
 import IApplicant from '../../interfaces/IApplicant.inteface'
 
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+
 type Props = {
-  onSubmit: (applicant: IApplicant) => void;
+  // onSubmit: (applicant: IApplicant) => void;
   setActive: (applicantStatus: boolean) => void;
 }
 
 const ContactForm = ({
-  onSubmit,
+  // onSubmit,
   setActive,
   
 }: Props) => {
@@ -21,6 +25,12 @@ const ContactForm = ({
   const [desiredPosition, setDesiredPosition] = useState('');
   // const { status, setStatus } = useContext(StatusContext);
   const   [status, setStatus] = useState('');
+
+  const dispatch = useAppDispatch();
+  const applicants = useAppSelector(({applicants}) => {
+    
+    return applicants;
+  });
  
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +51,25 @@ const ContactForm = ({
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    console.log(status);
+      const newApplicant = {
+      id: shortid.generate(),
+      name,
+      number,
+      desiredPosition,
+      status,
+    };
 
-    onSubmit({ name, number, desiredPosition, status });
+      const checkedApplicantsNames = applicants.map(applicant => {
+      return applicant.name.toLowerCase();
+    });
+
+      if (!checkedApplicantsNames.includes(name.toLowerCase())) {
+      dispatch(actions.addApplicant(newApplicant))
+    } else {
+      alert(`${name} is already in list`);
+    }
+
+    // onSubmit({ name, number, desiredPosition, status });
 
     reset();
   };

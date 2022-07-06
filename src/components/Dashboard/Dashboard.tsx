@@ -9,7 +9,7 @@ import ApplicantForm from '../ApplicantForm/ApplicantForm';
 
 // import initialApplicants from '../../components/Dashboard/applicants.json';
 
-import IApplicant from '../../interfaces/IApplicant.inteface';
+// import IApplicant from '../../interfaces/IApplicant.inteface';
 import {  useAppSelector } from '../../redux/hooks/hooks';
 
 
@@ -50,39 +50,39 @@ const Dashboard = () => {
   //   setApplicants(applicants.filter(applicant => applicant.id !== applicantId));
   // };
 
-  const makeApplicantAppointment = (applicantId: string) => {
-    const applicantForInterview = applicants.find(
-      applicant => applicantId === applicant.id,
-    );
+  // const makeApplicantAppointment = (applicantId: string) => {
+  //   const applicantForInterview = applicants.find(
+  //     applicant => applicantId === applicant.id,
+  //   );
 
-    if (applicantForInterview) {
-      const { id, name, number, desiredPosition } = applicantForInterview;
+  //   if (applicantForInterview) {
+  //     const { id, name, number, desiredPosition } = applicantForInterview;
 
-      const applicant = {
-        id,
-        name,
-        number,
-        desiredPosition,
-        status: 'interview',
-      };
+  //     const applicant = {
+  //       id,
+  //       name,
+  //       number,
+  //       desiredPosition,
+  //       status: 'interview',
+  //     };
 
-      // erasing an applicant from previous status line
-      setApplicants(
-        applicants.filter(applicant => applicant.id !== applicantId),
-      );
+  //     // erasing an applicant from previous status line
+  //     setApplicants(
+  //       applicants.filter(applicant => applicant.id !== applicantId),
+  //     );
 
-      // setting new array of applicants with changed applicant
-      setApplicants(prevApplicants => {
-        // console.log(prevApplicants)
-        return [...prevApplicants, applicant];
-      });
-    }
+  //     // setting new array of applicants with changed applicant
+  //     setApplicants(prevApplicants => {
+  //       // console.log(prevApplicants)
+  //       return [...prevApplicants, applicant];
+  //     });
+  //   }
 
-    // temporary
-    // if (applicantForInterview) {
-    //   applicantForInterview.status = 'interview';
-    // }
-  };
+  //   // temporary
+  //   // if (applicantForInterview) {
+  //   //   applicantForInterview.status = 'interview';
+  //   // }
+  // };
 
   // const approveApplicant = (applicantId: string) => {
   //   const applicantForApproval = applicants.find(
@@ -139,12 +139,12 @@ const Dashboard = () => {
         applicants={visibleApplicants}
         // onApplicantDelete={deleteApplicant}
         setActive={setModalActive}
-        onApplicantToInterview={makeApplicantAppointment}
+        // onApplicantToInterview={makeApplicantAppointment}
       />
       <InterviewList
         applicants={visibleApplicants}
         // onApplicantDelete={deleteApplicant}
-        onApproveApplicant={approveApplicant}
+        // onApproveApplicant={approveApplicant}
       />
 
       <ApprovedList

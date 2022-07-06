@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import shortid from 'shortid';
 
@@ -6,7 +6,7 @@ import s from './Applicant.module.scss';
 import actions from '../../redux/app/actions'
 
 // import StatusContext from '../../context/context';
-import IApplicant from '../../interfaces/IApplicant.inteface'
+// import IApplicant from '../../interfaces/IApplicant.inteface'
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 

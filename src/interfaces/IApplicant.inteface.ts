@@ -1,5 +1,5 @@
 export default interface IApplicant {
-    id?: string;
+    id: string;
     name: string;
     desiredPosition: string;
     number: string;

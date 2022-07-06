@@ -3,42 +3,88 @@ import { Card, Button } from 'react-bootstrap';
 
 import IApplicant from '../../interfaces/IApplicant.inteface';
 
-import actions from '../../redux/app/actions'
-import { useAppDispatch } from '../../redux/hooks/hooks';
+import actions from '../../redux/app/actions';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 
 type Props = {
   applicantsData: IApplicant;
   // onClickRemove: (applicantId: string) => void;
-  onClickToInterview?: (applicantId: string) => void;
-  onClickToApprove?: (applicantId: string) => void;
+  // onClickToInterview?: (applicantId: string) => void;
+  // onClickToApprove?: (applicantId: string) => void;
 };
 
 const ApplicantCard = ({
   applicantsData,
-  // onClickRemove,
-  onClickToInterview,
-  onClickToApprove,
-}: Props) => {
+}: // onClickRemove,
+// onClickToInterview,
+// onClickToApprove,
+Props) => {
   const { id, name, number, desiredPosition, status } = applicantsData;
 
+  const applicants = useAppSelector(({ applicants }) => {
+    return applicants;
+  });
   const dispatch = useAppDispatch();
 
   const handleMoveApplicantToIterview = () => {
-    if (onClickToInterview && id) {
-      onClickToInterview(id);
+    if (status === 'application') {
+      // onClickToInterview(id);
+      const applicantForInterview = applicants.find(
+        applicant => id === applicant.id,
+      );
+
+      if (applicantForInterview) {
+        const { id, name, number, desiredPosition } = applicantForInterview;
+
+        const applicant = {
+          id,
+          name,
+          number,
+          desiredPosition,
+          status: 'interview',
+        };
+
+        // erasing an applicant from previous status line
+        dispatch(actions.deleteApplicant(id));
+        // setting new array of applicants with changed applicant
+        dispatch(actions.setApplicantToInterview(applicant));
+      }
     }
   };
 
   const handleMoveApplicantToApproved = () => {
-    if (onClickToApprove && id) {
-      onClickToApprove(id);
+    // if (onClickToApprove && id) {
+    //   onClickToApprove(id);
+    // }
+
+    if (status === 'interview') {
+      const applicantForApproval = applicants.find(
+        applicant => id === applicant.id,
+      );
+
+      if (applicantForApproval) {
+        const { id, name, number, desiredPosition } = applicantForApproval;
+
+        const applicant = {
+          id,
+          name,
+          number,
+          desiredPosition,
+          status: 'approved',
+        };
+
+        // erasing an applicant from previous status line
+        dispatch(actions.deleteApplicant(id));
+        // setting new array of applicants with changed applicant
+        dispatch(actions.setApplicantToApproved(applicant));
+      }
     }
   };
 
   const handleDeleteApplicant = () => {
     if (id) {
       // onClickRemove(id);
-      dispatch(actions.deleteApplicant(id))
+      dispatch(actions.deleteApplicant(id));
     }
   };
 

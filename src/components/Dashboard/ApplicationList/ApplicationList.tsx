@@ -18,14 +18,14 @@ interface Props {
   applicants: IApplicant[];
   // onApplicantDelete: (applicantId: string) => void;
   setActive: (sctiveStatus: boolean) => void; // not sure yet
-  onApplicantToInterview: (applicantId: string) => void;
+  // onApplicantToInterview: (applicantId: string) => void;
 }
 
 const ApplicationList = ({
   applicants,
   // onApplicantDelete,
   setActive,
-  onApplicantToInterview,
+  // onApplicantToInterview,
 }: Props) => {
   return (
     <>
@@ -47,7 +47,7 @@ const ApplicationList = ({
                     // onClickToInterview={() => onApplicantToInterview(id)}
                     applicantsData={applicant}
                     // onClickRemove={onApplicantDelete}
-                    onClickToInterview={onApplicantToInterview}
+                    // onClickToInterview={onApplicantToInterview}
                     // applicantStatus={status}
                     // applicantId={id}
                   />

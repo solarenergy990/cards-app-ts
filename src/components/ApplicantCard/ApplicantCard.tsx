@@ -3,20 +3,25 @@ import { Card, Button } from 'react-bootstrap';
 
 import IApplicant from '../../interfaces/IApplicant.inteface';
 
+import actions from '../../redux/app/actions'
+import { useAppDispatch } from '../../redux/hooks/hooks';
+
 type Props = {
   applicantsData: IApplicant;
-  onClickRemove: (applicantId: string) => void;
+  // onClickRemove: (applicantId: string) => void;
   onClickToInterview?: (applicantId: string) => void;
   onClickToApprove?: (applicantId: string) => void;
 };
 
 const ApplicantCard = ({
   applicantsData,
-  onClickRemove,
+  // onClickRemove,
   onClickToInterview,
   onClickToApprove,
 }: Props) => {
   const { id, name, number, desiredPosition, status } = applicantsData;
+
+  const dispatch = useAppDispatch();
 
   const handleMoveApplicantToIterview = () => {
     if (onClickToInterview && id) {
@@ -32,7 +37,8 @@ const ApplicantCard = ({
 
   const handleDeleteApplicant = () => {
     if (id) {
-      onClickRemove(id);
+      // onClickRemove(id);
+      dispatch(actions.deleteApplicant(id))
     }
   };
 

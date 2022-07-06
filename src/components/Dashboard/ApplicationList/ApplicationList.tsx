@@ -16,14 +16,14 @@ import IApplicant from '../../../interfaces/IApplicant.inteface'
 
 interface Props {
   applicants: IApplicant[];
-  onApplicantDelete: (applicantId: string) => void;
+  // onApplicantDelete: (applicantId: string) => void;
   setActive: (sctiveStatus: boolean) => void; // not sure yet
   onApplicantToInterview: (applicantId: string) => void;
 }
 
 const ApplicationList = ({
   applicants,
-  onApplicantDelete,
+  // onApplicantDelete,
   setActive,
   onApplicantToInterview,
 }: Props) => {
@@ -46,7 +46,7 @@ const ApplicationList = ({
                     // onClickRemove={() => onApplicantDelete(id)}
                     // onClickToInterview={() => onApplicantToInterview(id)}
                     applicantsData={applicant}
-                    onClickRemove={onApplicantDelete}
+                    // onClickRemove={onApplicantDelete}
                     onClickToInterview={onApplicantToInterview}
                     // applicantStatus={status}
                     // applicantId={id}

@@ -137,7 +137,7 @@ const Dashboard = () => {
       </Modal>
       <ApplicationList
         applicants={visibleApplicants}
-        onApplicantDelete={deleteApplicant}
+        // onApplicantDelete={deleteApplicant}
         setActive={setModalActive}
         onApplicantToInterview={makeApplicantAppointment}
       />

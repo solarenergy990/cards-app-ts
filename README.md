@@ -1,1 +1,1 @@
-# trialDayApp
+# Cards App TS + Redux

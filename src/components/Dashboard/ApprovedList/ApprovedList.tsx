@@ -18,7 +18,6 @@ const ApprovedList = ({ applicants }: Props) => {
 
           return (
             <div className={s.card} key={id}>
-              
               {status === 'approved' && (
                 <ApplicantCard applicantsData={applicant} />
               )}

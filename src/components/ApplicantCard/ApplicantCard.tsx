@@ -46,6 +46,7 @@ const ApplicantCard = ({ applicantsData }: Props) => {
     }
   };
 
+   // Changes status for an applicant so that he moves to the approved column
   const handleMoveApplicantToApproved = () => {
     if (status === 'interview') {
       const applicantForApproval = applicants.find(

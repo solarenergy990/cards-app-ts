@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import s from './ApplicantCard.module.scss';
 
 import IApplicant from '../../interfaces/IApplicant.inteface';
 
@@ -46,7 +47,7 @@ const ApplicantCard = ({ applicantsData }: Props) => {
     }
   };
 
-   // Changes status for an applicant so that he moves to the approved column
+  // Changes status for an applicant so that he moves to the approved column
   const handleMoveApplicantToApproved = () => {
     if (status === 'interview') {
       const applicantForApproval = applicants.find(
@@ -86,32 +87,34 @@ const ApplicantCard = ({ applicantsData }: Props) => {
           <Card.Subtitle className="mb-2 text-muted">{name}</Card.Subtitle>
           <Card.Text>Candidates desired position: {desiredPosition}</Card.Text>
           <Card.Text>Candidates number: {number}</Card.Text>
-
-          <Button
-            type="button"
-            variant="danger"
-            onClick={handleDeleteApplicant}
-          >
-            Delete
-          </Button>
-          {status === 'application' && (
+          
+          <div className={s['button-wrapper']}>
             <Button
               type="button"
-              variant="success"
-              onClick={handleMoveApplicantToIterview}
+              variant="danger"
+              onClick={handleDeleteApplicant}
             >
-              Make appointment
+              Delete
             </Button>
-          )}
-          {status === 'interview' && (
-            <Button
-              type="button"
-              variant="success"
-              onClick={handleMoveApplicantToApproved}
-            >
-              Approve Candidate
-            </Button>
-          )}
+            {status === 'application' && (
+              <Button
+                type="button"
+                variant="success"
+                onClick={handleMoveApplicantToIterview}
+              >
+                Make appointment
+              </Button>
+            )}
+            {status === 'interview' && (
+              <Button
+                type="button"
+                variant="success"
+                onClick={handleMoveApplicantToApproved}
+              >
+                Approve Candidate
+              </Button>
+            )}
+          </div>
         </Card.Body>
       </Card>
     </div>

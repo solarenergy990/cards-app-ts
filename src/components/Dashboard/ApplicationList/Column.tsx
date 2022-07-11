@@ -11,7 +11,7 @@ interface Props {
   setActive: (sctiveStatus: boolean) => void; // not sure yet
 }
 
-const ApplicationList = ({ applicants,column, setActive }: Props) => {
+const Column = ({ applicants,column, setActive }: Props) => {
   return (
     <ListContainer title={column.title}>
       <ul>
@@ -40,4 +40,4 @@ const ApplicationList = ({ applicants,column, setActive }: Props) => {
   );
 };
 
-export default ApplicationList;
+export default Column;

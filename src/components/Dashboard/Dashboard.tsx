@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ApplicationList from './ApplicationList/ApplicationList';
+import Column from './ApplicationList/ApplicationList';
 // import InterviewList from './InterviewList/InterviewList';
 // import ApprovedList from './ApprovedList/ApprovedList';
 import Modal from '../Modal/Modal';
@@ -27,7 +27,7 @@ const Dashboard = () => {
   return (
     <>
       <Modal active={modalActive} setActive={setModalActive}>
-        {/* <ApplicantForm setActive={setModalActive} /> */}
+        <ApplicantForm setActive={setModalActive} />
       </Modal>
       <ul>
         {columnOrderState.map(columnId => {
@@ -36,7 +36,7 @@ const Dashboard = () => {
             applicantId => applicantsState[applicantId],
           );
           return (
-            <ApplicationList
+            <Column
               key={column.id}
               column={column}
               applicants={applicants}

@@ -13,6 +13,7 @@ const {
   setApplicantToInterview,
   setApplicantToApproved,
   deleteApplicant,
+  reorderApplicants
 } = appActions;
 
   // interface IInitialState {
@@ -55,5 +56,10 @@ export default createReducer(initialState, builder => {
           ),
         ],
       };
+    }).addCase(reorderApplicants, (state, action)=> {
+      return {
+        ...state, 
+        applicants: [...action.payload]
+      }
     });
 });

@@ -15,11 +15,13 @@ const setApplicantToApproved = createAction<
 const deleteApplicant = createAction<string, 'app/deleteApplicant'>(
   'app/deleteApplicant',
 );
+const reorderApplicants = createAction<IApplicant[],'app/reorderApplicants'> ('app/reorderApplicants')
 
 const appActions = {
   addApplicant,
   setApplicantToInterview,
   setApplicantToApproved,
   deleteApplicant,
+  reorderApplicants,
 };
 export default appActions;

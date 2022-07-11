@@ -8,7 +8,8 @@ import ApplicantForm from '../ApplicantForm/ApplicantForm';
 
 import { DragDropContext } from 'react-beautiful-dnd';
 
-// import { useAppSelector } from '../../redux/hooks/hooks';
+import actions from '../../redux/app/actions';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 // import { IApplicant } from '../../interfaces/IApplicant.inteface';
 
 const Dashboard = () => {
@@ -18,17 +19,25 @@ const Dashboard = () => {
   // const columnsState = useAppSelector(({ columns }) => {
   //   return columns;
   // });
-  // const applicantsState = useAppSelector(({ applicants }) => {
-  //   return applicants;
-  // });
+  const applicantsState = useAppSelector(({ applicants }) => {
+    return applicants;
+  });
+  const dispatch = useAppDispatch();
   // const columnOrderState = useAppSelector(({ columnOrder }) => {
   //   return columnOrder;
   // });
 
   const onDragEnd = (result: any) => {
-    // TODO: to do drag and
-    console.log(result)
-    return result;
+    if (!result.destination) return;
+    //  creating new array from state
+    const applicants = Array.from(applicantsState);
+    // reordering new array
+    const [reorderedApplicant] = applicants.splice(result.source.index, 1);
+    applicants.splice(result.destination.index, 0, reorderedApplicant);
+    console.log(result);
+
+    // dispatching new array to reducer
+    dispatch(actions.reorderApplicants(applicants));
   };
 
   return (

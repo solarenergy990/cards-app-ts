@@ -31,6 +31,7 @@ export default createReducer(initialState, builder => {
       return {
         ...state,
         applicants: [...state.applicants, action.payload],
+        
       };
     })
     .addCase(setApplicantToInterview, (state, action) => {

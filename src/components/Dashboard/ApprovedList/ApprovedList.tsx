@@ -3,17 +3,25 @@ import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './ApprovedList.module.scss';
 
-import IApplicant from '../../../interfaces/IApplicant.inteface';
+// import {IApplicant} from '../../../interfaces/IApplicant.inteface';
 
-type Props = {
-  applicants: IApplicant[];
-};
+import { useAppSelector } from '../../../redux/hooks/hooks';
 
-const ApprovedList = ({ applicants }: Props) => {
+// type Props = {
+//   applicants: IApplicant[];
+  
+// };
+
+const ApprovedList = () => {
+  const applicantsState = useAppSelector(({ applicants }) => {
+    return applicants;
+  });
+  
+
   return (
     <ListContainer title={'Approved'}>
       <ul>
-        {applicants.map(applicant => {
+        {applicantsState.map(applicant => {
           const { id, status } = applicant;
 
           return (

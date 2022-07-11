@@ -3,17 +3,23 @@ import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './InterviewList.module.scss';
 
-import IApplicant from '../../../interfaces/IApplicant.inteface';
+// import {IApplicant} from '../../../interfaces/IApplicant.inteface';
+import { useAppSelector } from '../../../redux/hooks/hooks';
 
-interface Props {
-  applicants: IApplicant[];
-}
+// interface Props {
+//   applicants: IApplicant[];
+ 
+// }
 
-const InterviewList = ({ applicants }: Props) => {
+const InterviewList = () => {
+
+  const applicantsState = useAppSelector(({ applicants }) => {
+    return applicants;
+  });
   return (
     <ListContainer title={'Interview'}>
       <ul>
-        {applicants.map(applicant => {
+        {applicantsState.map(applicant => {
           const { id, status } = applicant;
 
           return (

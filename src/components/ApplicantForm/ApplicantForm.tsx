@@ -6,6 +6,7 @@ import s from './Applicant.module.scss';
 import actions from '../../redux/app/actions';
 
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
+import {IApplicant} from '../../interfaces/IApplicant.inteface'
 
 type Props = {
   setActive: (applicantStatus: boolean) => void;
@@ -20,8 +21,15 @@ const ApplicantForm = ({ setActive }: Props) => {
   // brings dispatcher here
   const dispatch = useAppDispatch();
   // brings global state here
-  const applicants = useAppSelector(({ applicants }) => {
+  const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
+  });
+  // brings global state of column order here
+  const columnOrderState = useAppSelector(({ columnOrder }) => {
+    return columnOrder;
+  });
+  const columnsState = useAppSelector(({ columns }) => {
+    return columns;
   });
 
   // catches form changes
@@ -44,23 +52,45 @@ const ApplicantForm = ({ setActive }: Props) => {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const newApplicant = {
+    const newApplicant: IApplicant = {
       id: shortid.generate(),
       name,
       number,
       desiredPosition,
       status,
     };
+    // const id = shortid.generate();
 
-    const checkedApplicantsNames = applicants.map(applicant => {
-      return applicant.name.toLowerCase();
-    });
+    // const newApplicant = {
+    //   id: {
+    //     id,
+    //     name,
+    //     number,
+    //     desiredPosition,
+    //     status,
+    //   },
+    // };
 
-    if (!checkedApplicantsNames.includes(name.toLowerCase())) {
-      dispatch(actions.addApplicant(newApplicant));
-    } else {
-      alert(`${name} is already in list`);
-    }
+    // const checkedApplicantsNames = columnOrderState.map(columnId => {
+    //   const column = columnsState[columnId];
+    //   const applicants = column.applicantIds.map(
+    //     applicantId => applicantsState[applicantId],
+    //   );
+
+    //   return applicants.map(applicant => applicant.name.toLowerCase());
+    // });
+
+    dispatch(actions.addApplicant(newApplicant));
+
+    // const checkedApplicantsNames = applicants.map(applicant => {
+    //   return applicant.name.toLowerCase();
+    // });
+
+    // if (!checkedApplicantsNames.includes(name.toLowerCase())) {
+    //   dispatch(actions.addApplicant(newApplicant));
+    // } else {
+    //   alert(`${name} is already in list`);
+    // }
 
     reset();
   };

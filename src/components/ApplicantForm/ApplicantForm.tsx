@@ -11,7 +11,7 @@ type Props = {
   setActive: (applicantStatus: boolean) => void;
 };
 
-const ContactForm = ({ setActive }: Props) => {
+const ApplicantForm = ({ setActive }: Props) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const [desiredPosition, setDesiredPosition] = useState('');
@@ -124,4 +124,4 @@ const ContactForm = ({ setActive }: Props) => {
   );
 };
 
-export default ContactForm;
+export default ApplicantForm;

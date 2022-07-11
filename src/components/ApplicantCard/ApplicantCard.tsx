@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import s from './ApplicantCard.module.scss';
 
-import IApplicant from '../../interfaces/IApplicant.inteface';
+import {IApplicant} from '../../interfaces/IApplicant.inteface';
 
 import actions from '../../redux/app/actions';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
@@ -23,54 +23,54 @@ const ApplicantCard = ({ applicantsData }: Props) => {
 
   // Changes status for an applicant so that he moves to the interview column
   const handleMoveApplicantToIterview = () => {
-    if (status === 'application') {
-      const applicantForInterview = applicants.find(
-        applicant => id === applicant.id,
-      );
+    // if (status === 'application') {
+    //   const applicantForInterview = applicants.map(
+    //     applicant => id === applicant.id,
+    //   );
 
-      if (applicantForInterview) {
-        const { id, name, number, desiredPosition } = applicantForInterview;
+    //   if (applicantForInterview) {
+    //     const { id, name, number, desiredPosition } = applicantForInterview;
 
-        const applicant = {
-          id,
-          name,
-          number,
-          desiredPosition,
-          status: 'interview',
-        };
+    //     const applicant = {
+    //       id,
+    //       name,
+    //       number,
+    //       desiredPosition,
+    //       status: 'interview',
+    //     };
 
-        // erasing an applicant from previous status column
-        dispatch(actions.deleteApplicant(id));
-        // setting new array of applicants with changed applicant data
-        dispatch(actions.setApplicantToInterview(applicant));
-      }
-    }
+    //     // erasing an applicant from previous status column
+    //     dispatch(actions.deleteApplicant(id));
+    //     // setting new array of applicants with changed applicant data
+    //     dispatch(actions.setApplicantToInterview(applicant));
+    //   }
+    // }
   };
 
   // Changes status for an applicant so that he moves to the approved column
   const handleMoveApplicantToApproved = () => {
-    if (status === 'interview') {
-      const applicantForApproval = applicants.find(
-        applicant => id === applicant.id,
-      );
+    // if (status === 'interview') {
+    //   const applicantForApproval = applicants.find(
+    //     applicant => id === applicant.id,
+    //   );
 
-      if (applicantForApproval) {
-        const { id, name, number, desiredPosition } = applicantForApproval;
+    //   if (applicantForApproval) {
+    //     const { id, name, number, desiredPosition } = applicantForApproval;
 
-        const applicant = {
-          id,
-          name,
-          number,
-          desiredPosition,
-          status: 'approved',
-        };
+    //     const applicant = {
+    //       id,
+    //       name,
+    //       number,
+    //       desiredPosition,
+    //       status: 'approved',
+    //     };
 
-        // erasing an applicant from previous status line
-        dispatch(actions.deleteApplicant(id));
-        // setting new array of applicants with changed applicant
-        dispatch(actions.setApplicantToApproved(applicant));
-      }
-    }
+    //     // erasing an applicant from previous status line
+    //     dispatch(actions.deleteApplicant(id));
+    //     // setting new array of applicants with changed applicant
+    //     dispatch(actions.setApplicantToApproved(applicant));
+    //   }
+    // }
   };
 
   const handleDeleteApplicant = () => {

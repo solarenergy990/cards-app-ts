@@ -3,20 +3,20 @@ import ListContainer from '../ListContainer/ListContainer';
 import s from './ApplicationList.module.scss';
 import { Button } from 'react-bootstrap';
 
-import IApplicant from '../../../interfaces/IApplicant.inteface';
+import { IApplicant, IColumn } from '../../../interfaces/IApplicant.inteface';
 
 interface Props {
   applicants: IApplicant[];
+  column: IColumn;
   setActive: (sctiveStatus: boolean) => void; // not sure yet
 }
 
-const ApplicationList = ({ applicants, setActive }: Props) => {
+const ApplicationList = ({ applicants,column, setActive }: Props) => {
   return (
-    <ListContainer title={'Applications'}>
+    <ListContainer title={column.title}>
       <ul>
         {applicants.map(applicant => {
           const { id, status } = applicant;
-
           return (
             <div className={s.card} key={id}>
               {status === 'application' && (

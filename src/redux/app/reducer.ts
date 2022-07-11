@@ -1,8 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
+import initialData from '../../components/Dashboard/initial-data';
 import appActions from './actions';
 
-import initialApplicants from '../../components/Dashboard/applicants.json';
-import IApplicant from '../../interfaces/IApplicant.inteface';
+// import initialApplicants from '../../components/Dashboard/applicants.json';
+
+
+
+
 
 const {
   addApplicant,
@@ -11,13 +15,15 @@ const {
   deleteApplicant,
 } = appActions;
 
-interface IInitialState {
-  applicants: IApplicant[];
-}
+  // interface IInitialState {
+  //   applicants: IApplicant[];
+  // }
 
-const initialState: IInitialState = {
-  applicants: initialApplicants,
-};
+// const initialState = {
+//   applicants: initialApplicants,
+// };
+
+const initialState = initialData
 
 export default createReducer(initialState, builder => {
   builder

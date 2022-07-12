@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/cards-app-ts/static/css/main.f84b72a1.css",
-    "main.js": "/cards-app-ts/static/js/main.246b9365.js",
+    "main.css": "/cards-app-ts/static/css/main.10c05248.css",
+    "main.js": "/cards-app-ts/static/js/main.b03c9fa0.js",
     "index.html": "/cards-app-ts/index.html",
-    "main.f84b72a1.css.map": "/cards-app-ts/static/css/main.f84b72a1.css.map",
-    "main.246b9365.js.map": "/cards-app-ts/static/js/main.246b9365.js.map"
+    "main.10c05248.css.map": "/cards-app-ts/static/css/main.10c05248.css.map",
+    "main.b03c9fa0.js.map": "/cards-app-ts/static/js/main.b03c9fa0.js.map"
   },
   "entrypoints": [
-    "static/css/main.f84b72a1.css",
-    "static/js/main.246b9365.js"
+    "static/css/main.10c05248.css",
+    "static/js/main.b03c9fa0.js"
   ]
 }

@@ -16,18 +16,23 @@ const InterviewList = () => {
   const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });
+
+
   return (
     <ListContainer title={'Interview'}>
-      <Droppable droppableId="interview">
-        {provided => (
-          <ul {...provided.droppableProps} ref={provided.innerRef}>
+      <Droppable droppableId="interview" type='CARDS'>
+        {(provided) => {
+          console.log('provided in droppable :', provided)
+          return (
+            <ul {...provided.droppableProps} ref={provided.innerRef} >
             {applicantsState.map((applicant, index) => {
               const { id, status } = applicant;
 
               return (
-                <Draggable draggableId={id} key={id} index={index}>
-                  {(provided) => (
-                    <li
+                <Draggable key={id} draggableId={id}  index={index}>
+                  {(provided) => {
+                    // console.log('provided in draggable :',provided)
+                    return (<li
                       className={s.card}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
@@ -36,14 +41,15 @@ const InterviewList = () => {
                       {status === 'interview' && (
                         <ApplicantCard applicantsData={applicant} />
                       )}
-                    </li>
-                  )}
+                    </li>)
+                  }}
                 </Draggable>
               );
             })}
             {provided.placeholder}
           </ul>
-        )}
+          ) 
+        }}
       </Droppable>
     </ListContainer>
   );

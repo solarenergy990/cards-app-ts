@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './ApplicationList.module.scss';
@@ -7,35 +8,54 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { useAppSelector } from '../../../redux/hooks/hooks';
 
+import { IColumn, IApplicant } from '../../../interfaces/IApplicant.inteface';
+
 interface Props {
+  column: IColumn;
   setActive: (activeStatus: boolean) => void; // not sure yet
 }
 
-const ApplicationList = ({ setActive}: Props) => {
+const ApplicationList = ({ setActive, column }: Props) => {
   const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });
 
+  const [filteredApplicants, setFilteredApplicants] = useState<IApplicant[]>(
+    [],
+  );
+
+  useEffect(() => {
+    if (applicantsState) {
+      const filterdApplicants = applicantsState.filter(
+        applicant => applicant.status === column.id,
+      );
+
+      setFilteredApplicants(filterdApplicants);
+    }
+  }, [applicantsState, column.id]);
+
   // console.log(applicants)
   return (
-    <ListContainer title={'Application'}>
-      <Droppable droppableId="application">
+    <ListContainer title={column.title}>
+      <Droppable droppableId={column.id}>
         {provided => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {applicantsState.map((applicant, index) => {
-              const { id, status } = applicant;
+            {filteredApplicants.map((applicant, index) => {
+              const { id } = applicant;
+
               return (
                 <Draggable draggableId={id} key={id} index={index}>
                   {provided => (
-                    <li 
+                    <li
                       className={s.card}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
                     >
-                      {status === 'application' && (
+                      <ApplicantCard applicantsData={applicant} />
+                      {/* {status === 'application' && (
                         <ApplicantCard applicantsData={applicant} />
-                      )}
+                      )} */}
                     </li>
                   )}
                 </Draggable>
@@ -47,13 +67,15 @@ const ApplicationList = ({ setActive}: Props) => {
       </Droppable>
 
       <div className={s.button}>
-        <Button
-          type="button"
-          variant="btn btn-success"
-          onClick={() => setActive(true)}
-        >
-          +
-        </Button>
+        {column.id === 'application' && (
+          <Button
+            type="button"
+            variant="btn btn-success"
+            onClick={() => setActive(true)}
+          >
+            +
+          </Button>
+        )}
       </div>
     </ListContainer>
   );

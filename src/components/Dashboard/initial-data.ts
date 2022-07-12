@@ -49,7 +49,7 @@ const columns: IColumn[] = [
   },
 ];
 
-const columnOrder = ['Application', 'Interview', 'Approved'];
+const columnOrder = ['application', 'interview', 'approved'];
 
 const initialData = {
   applicants,

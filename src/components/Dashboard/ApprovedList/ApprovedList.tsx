@@ -12,6 +12,7 @@ const ApprovedList = () => {
     return applicants;
   });
 
+
   return (
     <ListContainer title={'Approved'}>
       <Droppable droppableId="approved">

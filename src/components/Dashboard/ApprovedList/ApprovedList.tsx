@@ -3,36 +3,44 @@ import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './ApprovedList.module.scss';
 
-// import {IApplicant} from '../../../interfaces/IApplicant.inteface';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { useAppSelector } from '../../../redux/hooks/hooks';
-
-// type Props = {
-//   applicants: IApplicant[];
-  
-// };
 
 const ApprovedList = () => {
   const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });
-  
 
   return (
     <ListContainer title={'Approved'}>
-      <ul>
-        {applicantsState.map(applicant => {
-          const { id, status } = applicant;
+      <Droppable droppableId="approved">
+        {provided => (
+          <ul {...provided.droppableProps} ref={provided.innerRef}>
+            {applicantsState.map((applicant, index) => {
+              const { id, status } = applicant;
 
-          return (
-            <div className={s.card} key={id}>
-              {status === 'approved' && (
-                <ApplicantCard applicantsData={applicant} />
-              )}
-            </div>
-          );
-        })}
-      </ul>
+              return (
+                <Draggable draggableId={id} key={id} index={index}>
+                  {provided => (
+                    <li
+                      className={s.card}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}
+                    >
+                      {status === 'approved' && (
+                        <ApplicantCard applicantsData={applicant} />
+                      )}
+                    </li>
+                  )}
+                </Draggable>
+              );
+            })}
+            {provided.placeholder}
+          </ul>
+        )}
+      </Droppable>
     </ListContainer>
   );
 };

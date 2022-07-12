@@ -1,6 +1,7 @@
 .container {
   display: flex;
   width: 320px;
+  min-height: 200px;
   margin-right: auto;
   margin-left: auto;
   align-content: center;
@@ -18,3 +19,4 @@
     padding-right: 56px;
   }
 }
+

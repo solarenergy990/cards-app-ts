@@ -2,17 +2,16 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import s from './ApplicantCard.module.scss';
 
-import {IApplicant} from '../../interfaces/IApplicant.inteface';
+import { IApplicant } from '../../interfaces/IApplicant.inteface';
 
 import actions from '../../redux/app/actions';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
 
 type Props = {
   applicantsData: IApplicant;
-  innerRef?: any;
 };
 
-const ApplicantCard = ({ applicantsData, innerRef }: Props) => {
+const ApplicantCard = ({ applicantsData }: Props) => {
   const { id, name, number, desiredPosition, status } = applicantsData;
 
   // brings global state here
@@ -81,14 +80,14 @@ const ApplicantCard = ({ applicantsData, innerRef }: Props) => {
   };
 
   return (
-    <div ref={innerRef}>
+    <div>
       <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>Candidate</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{name}</Card.Subtitle>
           <Card.Text>Candidates desired position: {desiredPosition}</Card.Text>
           <Card.Text>Candidates number: {number}</Card.Text>
-          
+
           <div className={s['button-wrapper']}>
             <Button
               type="button"

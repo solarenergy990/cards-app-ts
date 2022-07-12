@@ -4,15 +4,14 @@ import s from './ApplicationList.module.scss';
 import { Button } from 'react-bootstrap';
 
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-// import { IApplicant } from '../../../interfaces/IApplicant.inteface';
+
 import { useAppSelector } from '../../../redux/hooks/hooks';
 
 interface Props {
-  innerRef?: any;
   setActive: (activeStatus: boolean) => void; // not sure yet
 }
 
-const ApplicationList = ({ setActive, innerRef }: Props) => {
+const ApplicationList = ({ setActive}: Props) => {
   const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });

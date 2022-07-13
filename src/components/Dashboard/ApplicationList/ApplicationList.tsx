@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './ApplicationList.module.scss';
@@ -8,7 +8,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { useAppSelector } from '../../../redux/hooks/hooks';
 
-import { IColumn, IApplicant } from '../../../interfaces/IApplicant.inteface';
+import { IColumn} from '../../../interfaces/IApplicant.inteface';
 
 interface Props {
   column: IColumn;
@@ -20,9 +20,10 @@ const ApplicationList = ({ setActive, column }: Props) => {
     return applicants;
   });
 
-  const filteredState = Array.from(applicantsState).filter(applicant => applicant.status === column.id)
+  const filteredState = Array.from(applicantsState).filter(
+    applicant => applicant.status === column.id,
+  );
 
-  
   return (
     <ListContainer title={column.title}>
       <Droppable droppableId={column.id}>
@@ -30,11 +31,9 @@ const ApplicationList = ({ setActive, column }: Props) => {
           <ul {...provided.droppableProps} ref={provided.innerRef}>
             {filteredState.map((applicant, index) => {
               const { id } = applicant;
-              // console.log('droppable provided',provided)
               return (
                 <Draggable draggableId={id} key={id} index={index}>
                   {provided => {
-                    // console.log('draggableprovided :', provided)
                     return (
                       <li
                         className={s.card}
@@ -44,7 +43,7 @@ const ApplicationList = ({ setActive, column }: Props) => {
                       >
                         <ApplicantCard applicantsData={applicant} />
                       </li>
-                    )
+                    );
                   }}
                 </Draggable>
               );

@@ -28,11 +28,10 @@ console.log(result)
   const onDragEnd = (result: any) => {
     console.log('on drag end result :', result)
     const { destination, source, draggableId } = result;
-    // console.log('destination check :', !destination)
+ 
     if (!destination) return;
 
-    // console.log('checking if the position did not change', destination.droppableId === source.droppableId &&
-    // destination.index === source.index)
+   
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -62,12 +61,13 @@ console.log(result)
       dispatch(actions.reorderApplicants(reorderedApplicants));
     }
 
+    // condition moves cards between columns
     if (source.droppableId !== destination.droppableId) {
       const applicants = Array.from(applicantsState);
       const applicantToChangePosition = applicants.find(
         applicant => applicant.id === draggableId,
       );
-      // condition moves cards between columns
+      
       if (applicantToChangePosition) {
         const { id, name, number, desiredPosition } = applicantToChangePosition;
 

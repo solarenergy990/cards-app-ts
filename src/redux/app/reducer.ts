@@ -2,29 +2,15 @@ import { createReducer } from '@reduxjs/toolkit';
 import initialData from '../../components/Dashboard/initial-data';
 import appActions from './actions';
 
-// import initialApplicants from '../../components/Dashboard/applicants.json';
-
-
-
-
-
 const {
   addApplicant,
-  setApplicantToInterview,
-  setApplicantToApproved,
+  moveApplicant,
+  
   deleteApplicant,
-  reorderApplicants
+  reorderApplicants,
 } = appActions;
 
-  // interface IInitialState {
-  //   applicants: IApplicant[];
-  // }
-
-// const initialState = {
-//   applicants: initialApplicants,
-// };
-
-const initialState = initialData
+const initialState = initialData;
 
 export default createReducer(initialState, builder => {
   builder
@@ -32,21 +18,20 @@ export default createReducer(initialState, builder => {
       return {
         ...state,
         applicants: [...state.applicants, action.payload],
-        
       };
     })
-    .addCase(setApplicantToInterview, (state, action) => {
+    .addCase(moveApplicant, (state, action) => {
       return {
         ...state,
         applicants: [...state.applicants, action.payload],
       };
     })
-    .addCase(setApplicantToApproved, (state, action) => {
-      return {
-        ...state,
-        applicants: [...state.applicants, action.payload],
-      };
-    })
+    // .addCase(setApplicantToApproved, (state, action) => {
+    //   return {
+    //     ...state,
+    //     applicants: [...state.applicants, action.payload],
+    //   };
+    // })
     .addCase(deleteApplicant, (state, action) => {
       return {
         ...state,
@@ -56,10 +41,11 @@ export default createReducer(initialState, builder => {
           ),
         ],
       };
-    }).addCase(reorderApplicants, (state, action)=> {
+    })
+    .addCase(reorderApplicants, (state, action) => {
       return {
-        ...state, 
-        applicants: [...action.payload]
-      }
+        ...state,
+        applicants: [...action.payload],
+      };
     });
 });

@@ -4,14 +4,14 @@ import { IApplicant } from '../../interfaces/IApplicant.inteface';
 const addApplicant = createAction<IApplicant, 'app/addApplicant'>(
   'app/addApplicant',
 );
-const setApplicantToInterview = createAction<
+const moveApplicant = createAction<
   IApplicant,
-  'app/setApplicantToInterview'
->('app/setApplicantToInterview');
-const setApplicantToApproved = createAction<
-  IApplicant,
-  'app/setApplicantToApproved'
->('app/setApplicantToApproved');
+  'app/moveApplicant'
+>('app/moveApplicant');
+// const setApplicantToApproved = createAction<
+//   IApplicant,
+//   'app/setApplicantToApproved'
+// >('app/setApplicantToApproved');
 const deleteApplicant = createAction<string, 'app/deleteApplicant'>(
   'app/deleteApplicant',
 );
@@ -19,8 +19,8 @@ const reorderApplicants = createAction<IApplicant[],'app/reorderApplicants'> ('a
 
 const appActions = {
   addApplicant,
-  setApplicantToInterview,
-  setApplicantToApproved,
+  moveApplicant,
+  
   deleteApplicant,
   reorderApplicants,
 };

@@ -41,8 +41,8 @@ const ApplicantCard = ({ applicantsData }: Props) => {
 
         // erasing an applicant from previous status column
         dispatch(actions.deleteApplicant(id));
-        // setting new array of applicants with changed applicant data
-        dispatch(actions.setApplicantToInterview(applicant));
+        // dispatching new applicant with changed status
+        dispatch(actions.moveApplicant(applicant));
       }
     }
   };
@@ -67,8 +67,8 @@ const ApplicantCard = ({ applicantsData }: Props) => {
 
         // erasing an applicant from previous status line
         dispatch(actions.deleteApplicant(id));
-        // setting new array of applicants with changed applicant
-        dispatch(actions.setApplicantToApproved(applicant));
+        // dispatching new applicant with changed status
+        dispatch(actions.moveApplicant(applicant));
       }
     }
   };

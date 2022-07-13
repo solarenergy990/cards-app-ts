@@ -53,9 +53,6 @@ const ApplicationList = ({ setActive, column }: Props) => {
                       ref={provided.innerRef}
                     >
                       <ApplicantCard applicantsData={applicant} />
-                      {/* {status === 'application' && (
-                        <ApplicantCard applicantsData={applicant} />
-                      )} */}
                     </li>
                   )}
                 </Draggable>

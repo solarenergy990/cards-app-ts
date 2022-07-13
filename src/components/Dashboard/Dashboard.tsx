@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
 import ApplicationList from './ApplicationList/ApplicationList';
-// import InterviewList from './InterviewList/InterviewList';
-// import ApprovedList from './ApprovedList/ApprovedList';
 import Modal from '../Modal/Modal';
 import ApplicantForm from '../ApplicantForm/ApplicantForm';
 
@@ -15,7 +13,7 @@ import { IApplicant } from '../../interfaces/IApplicant.inteface';
 const Dashboard = () => {
   const [modalActive, setModalActive] = useState(false);
 
-  const applicantsState: IApplicant[] = useAppSelector(({ applicants }) => {
+  const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });
   const columnsState = useAppSelector(({ columns }) => {
@@ -25,7 +23,6 @@ const Dashboard = () => {
 
   const onDragEnd = (result: any) => {
     const { destination, source, draggableId } = result;
-    // console.log(result);
     if (!destination) return;
 
     if (
@@ -35,7 +32,7 @@ const Dashboard = () => {
       return;
     }
 
-    // condition moves cards in one column
+    // condition moves cards within one column
     if (source.droppableId === destination.droppableId) {
       // creating new array of applicants
       const applicants = Array.from(
@@ -51,30 +48,22 @@ const Dashboard = () => {
       // reordering new array
       const [reorderedApplicant] = applicants.splice(source.index, 1);
       applicants.splice(destination.index, 0, reorderedApplicant);
-      // console.log([reorderedApplicant]);
       // joining reordered applicants with the rest applicants
       const reorderedApplicants = [...applicants, ...restApplicants];
       // dispatching new array to reducer
       dispatch(actions.reorderApplicants(reorderedApplicants));
-      // console.log(applicantsState);
     }
 
     if (source.droppableId !== destination.droppableId) {
-      console.log(source.droppableId !== destination.droppableId);
       const applicants = Array.from(applicantsState);
-
-      console.log(applicants);
       const applicantToChangePosition = applicants.find(
         applicant => applicant.id === draggableId,
       );
-
-      if (
-        applicantToChangePosition 
-        
-      ) {
+// condition moves cards between columns
+      if (applicantToChangePosition) {
         const { id, name, number, desiredPosition } = applicantToChangePosition;
 
-        const applicant = {
+        const applicant: IApplicant = {
           id,
           name,
           number,
@@ -82,9 +71,8 @@ const Dashboard = () => {
           status: destination.droppableId,
         };
 
-        console.log(applicant);
         dispatch(actions.deleteApplicant(id));
-        dispatch(actions.setApplicantToInterview(applicant));
+        dispatch(actions.moveApplicant(applicant));
       }
     }
   };
@@ -104,9 +92,6 @@ const Dashboard = () => {
             />
           );
         })}
-        {/* <ApplicationList setActive={setModalActive} /> */}
-        {/* <InterviewList /> */}
-        {/* <ApprovedList /> */}
       </DragDropContext>
     </>
   );

@@ -4,7 +4,7 @@ import ApplicationList from './ApplicationList/ApplicationList';
 import Modal from '../Modal/Modal';
 import ApplicantForm from '../ApplicantForm/ApplicantForm';
 
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 import actions from '../../redux/app/actions';
 import { useAppSelector, useAppDispatch } from '../../redux/hooks/hooks';
@@ -21,17 +21,12 @@ const Dashboard = () => {
   });
   const dispatch = useAppDispatch();
 
-  const onDragStart = (result:any) => {
-console.log(result)
-  }
-
-  const onDragEnd = (result: any) => {
-    console.log('on drag end result :', result)
+  // dnd logick
+  const onDragEnd = (result: DropResult): void => {
     const { destination, source, draggableId } = result;
- 
+
     if (!destination) return;
 
-   
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -47,6 +42,7 @@ console.log(result)
           return applicant.status === destination.droppableId;
         }),
       );
+
       const restApplicants = Array.from(
         applicantsState.filter(applicant => {
           return applicant.status !== destination.droppableId;
@@ -64,10 +60,11 @@ console.log(result)
     // condition moves cards between columns
     if (source.droppableId !== destination.droppableId) {
       const applicants = Array.from(applicantsState);
+
       const applicantToChangePosition = applicants.find(
         applicant => applicant.id === draggableId,
       );
-      
+
       if (applicantToChangePosition) {
         const { id, name, number, desiredPosition } = applicantToChangePosition;
 
@@ -84,7 +81,6 @@ console.log(result)
           applicant,
         ];
 
-        // dispatch(actions.moveApplicant(applicant));
         dispatch(actions.reorderApplicants(newApplicants));
       }
     }
@@ -95,7 +91,7 @@ console.log(result)
       <Modal active={modalActive} setActive={setModalActive}>
         <ApplicantForm setActive={setModalActive} />
       </Modal>
-      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+      <DragDropContext onDragEnd={onDragEnd}>
         {columnsState.map(column => {
           return (
             <ApplicationList

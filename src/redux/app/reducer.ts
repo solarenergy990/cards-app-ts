@@ -26,12 +26,6 @@ export default createReducer(initialState, builder => {
         applicants: [...state.applicants, action.payload],
       };
     })
-    // .addCase(setApplicantToApproved, (state, action) => {
-    //   return {
-    //     ...state,
-    //     applicants: [...state.applicants, action.payload],
-    //   };
-    // })
     .addCase(deleteApplicant, (state, action) => {
       return {
         ...state,

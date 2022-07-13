@@ -59,7 +59,7 @@ const Dashboard = () => {
       const applicantToChangePosition = applicants.find(
         applicant => applicant.id === draggableId,
       );
-// condition moves cards between columns
+      // condition moves cards between columns
       if (applicantToChangePosition) {
         const { id, name, number, desiredPosition } = applicantToChangePosition;
 

@@ -31,7 +31,7 @@ const ApplicantCard = ({ applicantsData }: Props) => {
       if (applicantForInterview) {
         const { id, name, number, desiredPosition } = applicantForInterview;
 
-        const applicant = {
+        const applicant: IApplicant = {
           id,
           name,
           number,
@@ -57,14 +57,13 @@ const ApplicantCard = ({ applicantsData }: Props) => {
       if (applicantForApproval) {
         const { id, name, number, desiredPosition } = applicantForApproval;
 
-        const applicant = {
+        const applicant: IApplicant = {
           id,
           name,
           number,
           desiredPosition,
           status: 'approved',
         };
-
         // erasing an applicant from previous status line
         dispatch(actions.deleteApplicant(id));
         // dispatching new applicant with changed status

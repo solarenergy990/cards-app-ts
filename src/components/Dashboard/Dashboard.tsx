@@ -21,10 +21,18 @@ const Dashboard = () => {
   });
   const dispatch = useAppDispatch();
 
+  const onDragStart = (result:any) => {
+console.log(result)
+  }
+
   const onDragEnd = (result: any) => {
+    console.log('on drag end result :', result)
     const { destination, source, draggableId } = result;
+    // console.log('destination check :', !destination)
     if (!destination) return;
 
+    // console.log('checking if the position did not change', destination.droppableId === source.droppableId &&
+    // destination.index === source.index)
     if (
       destination.droppableId === source.droppableId &&
       destination.index === source.index
@@ -71,8 +79,13 @@ const Dashboard = () => {
           status: destination.droppableId,
         };
 
-        dispatch(actions.deleteApplicant(id));
-        dispatch(actions.moveApplicant(applicant));
+        const newApplicants = [
+          ...applicants.filter(applicant => applicant.id !== id),
+          applicant,
+        ];
+
+        // dispatch(actions.moveApplicant(applicant));
+        dispatch(actions.reorderApplicants(newApplicants));
       }
     }
   };
@@ -82,7 +95,7 @@ const Dashboard = () => {
       <Modal active={modalActive} setActive={setModalActive}>
         <ApplicantForm setActive={setModalActive} />
       </Modal>
-      <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
         {columnsState.map(column => {
           return (
             <ApplicationList

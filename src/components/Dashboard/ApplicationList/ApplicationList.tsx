@@ -20,41 +20,32 @@ const ApplicationList = ({ setActive, column }: Props) => {
     return applicants;
   });
 
-  const [filteredApplicants, setFilteredApplicants] = useState<IApplicant[]>(
-    [],
-  );
+  const filteredState = Array.from(applicantsState).filter(applicant => applicant.status === column.id)
 
-  useEffect(() => {
-    if (applicantsState) {
-      const filterdApplicants = applicantsState.filter(
-        applicant => applicant.status === column.id,
-      );
-
-      setFilteredApplicants(filterdApplicants);
-    }
-  }, [applicantsState, column.id]);
-
-  // console.log(applicants)
+  
   return (
     <ListContainer title={column.title}>
       <Droppable droppableId={column.id}>
         {provided => (
           <ul {...provided.droppableProps} ref={provided.innerRef}>
-            {filteredApplicants.map((applicant, index) => {
+            {filteredState.map((applicant, index) => {
               const { id } = applicant;
-
+              // console.log('droppable provided',provided)
               return (
                 <Draggable draggableId={id} key={id} index={index}>
-                  {provided => (
-                    <li
-                      className={s.card}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      ref={provided.innerRef}
-                    >
-                      <ApplicantCard applicantsData={applicant} />
-                    </li>
-                  )}
+                  {provided => {
+                    // console.log('draggableprovided :', provided)
+                    return (
+                      <li
+                        className={s.card}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <ApplicantCard applicantsData={applicant} />
+                      </li>
+                    )
+                  }}
                 </Draggable>
               );
             })}

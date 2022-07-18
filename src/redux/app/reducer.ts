@@ -1,16 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
-import initialData from '../../components/Dashboard/initial-data';
+import initialState from '../../components/Dashboard/initial-data';
 import appActions from './actions';
 
 const {
   addApplicant,
   moveApplicant,
-  
   deleteApplicant,
   reorderApplicants,
 } = appActions;
-
-const initialState = initialData;
 
 export default createReducer(initialState, builder => {
   builder

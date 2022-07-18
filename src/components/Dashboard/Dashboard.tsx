@@ -33,7 +33,7 @@ const Dashboard = () => {
     ) {
       return;
     }
-
+    
     // condition moves cards within one column
     if (source.droppableId === destination.droppableId) {
       // creating new array of applicants

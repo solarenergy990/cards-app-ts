@@ -8,7 +8,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 
 import { useAppSelector } from '../../../redux/hooks/hooks';
 
-import { IColumn} from '../../../interfaces/IApplicant.inteface';
+import { IColumn } from '../../../interfaces/IApplicant.inteface';
 
 interface Props {
   column: IColumn;

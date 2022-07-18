@@ -81,6 +81,17 @@ const Dashboard = () => {
           applicant,
         ];
 
+        // reordering new array, finding an object to be reordered
+        const [reorderedApplicant] = Array.from(newApplicants).filter(
+          applicant => {
+            return applicant.id === draggableId;
+          },
+        );
+        // adding an object to the correct position
+        newApplicants.splice(destination.index, 0, reorderedApplicant);
+        // removing an object from the default position
+        newApplicants.pop();
+
         dispatch(actions.reorderApplicants(newApplicants));
       }
     }

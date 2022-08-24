@@ -2,7 +2,7 @@ import React from 'react';
 import ApplicantCard from '../../ApplicantCard/ApplicantCard';
 import ListContainer from '../ListContainer/ListContainer';
 import s from './ApplicationList.module.scss';
-import { Button } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
 
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -12,10 +12,9 @@ import { IColumn } from '../../../interfaces/IApplicant.inteface';
 
 interface Props {
   column: IColumn;
-  setActive: (activeStatus: boolean) => void; // not sure yet
 }
 
-const ApplicationList = ({ setActive, column }: Props) => {
+const ApplicationList = ({ column }: Props) => {
   const applicantsState = useAppSelector(({ applicants }) => {
     return applicants;
   });
@@ -52,18 +51,6 @@ const ApplicationList = ({ setActive, column }: Props) => {
           </ul>
         )}
       </Droppable>
-
-      <div className={s.button}>
-        {column.id === 'application' && (
-          <Button
-            type="button"
-            variant="btn btn-success"
-            onClick={() => setActive(true)}
-          >
-            +
-          </Button>
-        )}
-      </div>
     </ListContainer>
   );
 };

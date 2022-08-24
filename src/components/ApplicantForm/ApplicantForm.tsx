@@ -25,12 +25,12 @@ const ApplicantForm = ({ setActive }: Props) => {
     return applicants;
   });
   // brings global state of column order here
-  const columnOrderState = useAppSelector(({ columnOrder }) => {
-    return columnOrder;
-  });
-  const columnsState = useAppSelector(({ columns }) => {
-    return columns;
-  });
+  // const columnOrderState = useAppSelector(({ columnOrder }) => {
+  //   return columnOrder;
+  // });
+  // const columnsState = useAppSelector(({ columns }) => {
+  //   return columns;
+  // });
 
   // catches form changes
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,38 +59,17 @@ const ApplicantForm = ({ setActive }: Props) => {
       desiredPosition,
       status,
     };
-    // const id = shortid.generate();
+   
 
-    // const newApplicant = {
-    //   id: {
-    //     id,
-    //     name,
-    //     number,
-    //     desiredPosition,
-    //     status,
-    //   },
-    // };
+    const checkedApplicantsNames = applicantsState.map(applicant => {
+      return applicant.name.toLowerCase();
+    });
 
-    // const checkedApplicantsNames = columnOrderState.map(columnId => {
-    //   const column = columnsState[columnId];
-    //   const applicants = column.applicantIds.map(
-    //     applicantId => applicantsState[applicantId],
-    //   );
-
-    //   return applicants.map(applicant => applicant.name.toLowerCase());
-    // });
-
-    dispatch(actions.addApplicant(newApplicant));
-
-    // const checkedApplicantsNames = applicants.map(applicant => {
-    //   return applicant.name.toLowerCase();
-    // });
-
-    // if (!checkedApplicantsNames.includes(name.toLowerCase())) {
-    //   dispatch(actions.addApplicant(newApplicant));
-    // } else {
-    //   alert(`${name} is already in list`);
-    // }
+    if (!checkedApplicantsNames.includes(name.toLowerCase())) {
+      dispatch(actions.addApplicant(newApplicant));
+    } else {
+      alert(`${name} is already in list`);
+    }
 
     reset();
   };

@@ -3,7 +3,10 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+
+import { NavLink } from 'react-router-dom';
+
+import s from './Navigation.module.scss';
 
 const Navigation = () => {
   return (
@@ -12,15 +15,24 @@ const Navigation = () => {
         <Navbar.Brand href="home">Cards Application</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Link to='home'>
+          <Nav className="me-auto" variant="pills" defaultActiveKey="home">
+            <NavLink
+              to="home"
+              className={({ isActive }) => {
+                return isActive ? s['nav-active'] : s.nav;
+              }}
+            >
               Home
-            </Link>
-            <Link to='cards'>
+            </NavLink>
+
+            <NavLink
+              to="cards"
+              className={({ isActive }) => {
+                return isActive ? s['nav-active'] : s.nav;
+              }}
+            >
               Cards
-            </Link>
-            {/* <Nav.Link href="home">Home</Nav.Link> */}
-            {/* <Nav.Link href="cards">Cards</Nav.Link> */}
+            </NavLink>
           </Nav>
         </Navbar.Collapse>
       </Container>

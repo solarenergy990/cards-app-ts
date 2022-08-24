@@ -1,13 +1,14 @@
 import Container from '../Container/Container';
-import Dashboard from '../Dashboard/Dashboard';
-import Header from '../Header/Header';
+
+import Navigation from '../Navigation/Navigation';
+import Cards from '../../Views/Cards/Cards';
 
 const App = () => {
   return (
     <>
-      <Header />
+      <Navigation />
       <Container>
-        <Dashboard />
+        <Cards />
       </Container>
     </>
   );

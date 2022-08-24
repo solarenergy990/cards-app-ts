@@ -6,7 +6,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 
-const Header = () => {
+const Navigation = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -24,4 +24,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navigation;
